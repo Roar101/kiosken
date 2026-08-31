@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dg1nrf7yx5ycx"]
+
+[ext_resource type="Script" uid="uid://cil8yjgfverlv" path="res://scanner.gd" id="1_42jwx"]
+[ext_resource type="Texture2D" uid="uid://dt6d7hogf574u" path="res://Midlertidig sprites/Design uden navn.png" id="1_g73wu"]
+[ext_resource type="AudioStream" uid="uid://8igursstgx5d" path="res://Sounds/475557__rannem__bip.wav" id="3_iyc6d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ox3iu"]
+size = Vector2(309, 232)
+
+[node name="Scanner" type="Area2D" unique_id=1661137532]
+position = Vector2(928, 525)
+script = ExtResource("1_42jwx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1215365140]
+texture = ExtResource("1_g73wu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=945753870]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_ox3iu")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=992629020]
+stream = ExtResource("3_iyc6d")

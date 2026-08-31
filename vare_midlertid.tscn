@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://qaqb7lxa80jc"]
+
+[ext_resource type="Script" uid="uid://dyc25d5j21p5a" path="res://vare_midlertid.gd" id="1_0x1ao"]
+[ext_resource type="Texture2D" uid="uid://c167tjanccuvi" path="res://Midlertidig sprites/Gris.png" id="1_j10vx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ox3iu"]
+size = Vector2(206, 191)
+
+[node name="vare1" type="Area2D" unique_id=583075545]
+position = Vector2(707, 404)
+script = ExtResource("1_0x1ao")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2113665544]
+position = Vector2(-1, -1)
+scale = Vector2(0.68791944, 0.63804716)
+texture = ExtResource("1_j10vx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1811382939]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_ox3iu")
