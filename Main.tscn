@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cbe3s5boymfnx"]
+
+[ext_resource type="Texture2D" uid="uid://bbrdq070wbcac" path="res://Midlertidig sprites/images.jpg" id="1_glv2v"]
+[ext_resource type="Script" uid="uid://obednhmn1j4" path="res://main.gd" id="2_uu6xs"]
+
+[node name="Images" type="Sprite2D" unique_id=2139969824]
+position = Vector2(897, 659)
+scale = Vector2(0.5613532, 0.5443376)
+texture = ExtResource("1_glv2v")
+script = ExtResource("2_uu6xs")
