@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://ht10f3vv58b4"]
+
+[ext_resource type="Texture2D" uid="uid://cukyjq8q0yiws" path="res://Sprites/KioskKasseBånd.png" id="1_cxa1x"]
+[ext_resource type="Script" uid="uid://cil8yjgfverlv" path="res://scanner.gd" id="2_grmvp"]
+[ext_resource type="AudioStream" uid="uid://8igursstgx5d" path="res://Sounds/475557__rannem__bip.wav" id="3_l67pu"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x3t0m"]
+load_path = "res://.godot/imported/KioskKasseTest1920.png-102e84ed268427b022326054a60a8d3e.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ox3iu"]
+size = Vector2(285, 165)
+
+[node name="Kassebånd" type="Area2D" unique_id=1732336203]
+
+[node name="MainBånd" type="Sprite2D" parent="." unique_id=591156797]
+position = Vector2(960, 600)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("CompressedTexture2D_x3t0m")
+
+[node name="BåndExtend" type="Sprite2D" parent="." unique_id=2096368381]
+position = Vector2(1620, 885)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_cxa1x")
+
+[node name="Scanner" type="Area2D" parent="." unique_id=1887448201]
+script = ExtResource("2_grmvp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scanner" unique_id=669281617]
+position = Vector2(952.5, 952.5)
+shape = SubResource("RectangleShape2D_ox3iu")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Scanner" unique_id=1788078975]
+stream = ExtResource("3_l67pu")
+
+[connection signal="area_entered" from="Scanner" to="Scanner" method="_on_area_entered"]
+[connection signal="area_exited" from="Scanner" to="Scanner" method="_on_area_exited"]
