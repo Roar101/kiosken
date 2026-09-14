@@ -3,12 +3,16 @@
 [ext_resource type="Texture2D" uid="uid://cukyjq8q0yiws" path="res://Sprites/KioskKasseBånd.png" id="1_cxa1x"]
 [ext_resource type="Script" uid="uid://cil8yjgfverlv" path="res://scanner.gd" id="2_grmvp"]
 [ext_resource type="AudioStream" uid="uid://8igursstgx5d" path="res://Sounds/475557__rannem__bip.wav" id="3_l67pu"]
+[ext_resource type="Script" uid="uid://cbxqloah3w8ig" path="res://numpad_knap.gd" id="4_l67pu"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x3t0m"]
 load_path = "res://.godot/imported/KioskKasseTest1920.png-102e84ed268427b022326054a60a8d3e.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ox3iu"]
 size = Vector2(285, 165)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fyjm8"]
+size = Vector2(150, 90)
 
 [node name="Kassebånd" type="Area2D" unique_id=1732336203]
 
@@ -32,5 +36,13 @@ shape = SubResource("RectangleShape2D_ox3iu")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Scanner" unique_id=1788078975]
 stream = ExtResource("3_l67pu")
 
+[node name="NumpadKnap" type="Area2D" parent="." unique_id=677597772]
+script = ExtResource("4_l67pu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NumpadKnap" unique_id=1315032265]
+position = Vector2(990, 750)
+shape = SubResource("RectangleShape2D_fyjm8")
+
 [connection signal="area_entered" from="Scanner" to="Scanner" method="_on_area_entered"]
 [connection signal="area_exited" from="Scanner" to="Scanner" method="_on_area_exited"]
+[connection signal="input_event" from="NumpadKnap" to="NumpadKnap" method="_on_input_event"]
