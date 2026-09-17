@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://ht10f3vv58b4"]
 
+[ext_resource type="Script" uid="uid://bivjfgkyc3sda" path="res://kassebånd.gd" id="1_7415g"]
 [ext_resource type="Texture2D" uid="uid://cukyjq8q0yiws" path="res://Sprites/KioskKasseBånd.png" id="1_cxa1x"]
+[ext_resource type="Texture2D" uid="uid://dng1iafjwqkj" path="res://Sprites/KioskKasseBondEnd.png" id="2_0sqe1"]
 [ext_resource type="Script" uid="uid://cil8yjgfverlv" path="res://scanner.gd" id="2_grmvp"]
 [ext_resource type="AudioStream" uid="uid://8igursstgx5d" path="res://Sounds/475557__rannem__bip.wav" id="3_l67pu"]
 [ext_resource type="Script" uid="uid://cbxqloah3w8ig" path="res://numpad_knap.gd" id="4_l67pu"]
@@ -8,23 +10,48 @@
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x3t0m"]
 load_path = "res://.godot/imported/KioskKasseTest1920.png-102e84ed268427b022326054a60a8d3e.ctex"
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ox3iu"]
+atlas = ExtResource("2_0sqe1")
+region = Rect2(0, 0, 1170, 1920)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ox3iu"]
 size = Vector2(285, 165)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fyjm8"]
 size = Vector2(150, 90)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ox3iu"]
+b = Vector2(0, 238)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_fyjm8"]
+b = Vector2(0, 241)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_8bgmo"]
+b = Vector2(-1, 195)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8bgmo"]
+size = Vector2(525, 238)
+
 [node name="Kassebånd" type="Area2D" unique_id=1732336203]
+script = ExtResource("1_7415g")
 
 [node name="MainBånd" type="Sprite2D" parent="." unique_id=591156797]
 position = Vector2(960, 600)
 scale = Vector2(0.5, 0.5)
 texture = SubResource("CompressedTexture2D_x3t0m")
 
+[node name="BåndSlut" type="Sprite2D" parent="." unique_id=2130390176]
+position = Vector2(293, 885)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_ox3iu")
+
 [node name="BåndExtend" type="Sprite2D" parent="." unique_id=2096368381]
 position = Vector2(1620, 885)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_cxa1x")
+
+[node name="SpawnPunkt" type="Marker2D" parent="." unique_id=1710742420]
+position = Vector2(1861, 957)
 
 [node name="Scanner" type="Area2D" parent="." unique_id=1887448201]
 script = ExtResource("2_grmvp")
@@ -43,6 +70,35 @@ script = ExtResource("4_l67pu")
 position = Vector2(990, 750)
 shape = SubResource("RectangleShape2D_fyjm8")
 
+[node name="StopHojre" type="Area2D" parent="." unique_id=609143636]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StopHojre" unique_id=790232640]
+position = Vector2(1163, 842)
+shape = SubResource("SegmentShape2D_ox3iu")
+
+[node name="StopVenstre" type="Area2D" parent="." unique_id=1459986038]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StopVenstre" unique_id=1788754520]
+position = Vector2(71, 840)
+shape = SubResource("SegmentShape2D_fyjm8")
+
+[node name="StartGron" type="Area2D" parent="." unique_id=1354453726]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartGron" unique_id=1073057805]
+position = Vector2(633, 857)
+shape = SubResource("SegmentShape2D_8bgmo")
+
+[node name="MidteZone" type="Area2D" parent="." unique_id=2142126772]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MidteZone" unique_id=1145990950]
+position = Vector2(897.5, 961)
+shape = SubResource("RectangleShape2D_8bgmo")
+
 [connection signal="area_entered" from="Scanner" to="Scanner" method="_on_area_entered"]
 [connection signal="area_exited" from="Scanner" to="Scanner" method="_on_area_exited"]
 [connection signal="input_event" from="NumpadKnap" to="NumpadKnap" method="_on_input_event"]
+[connection signal="area_entered" from="StopHojre" to="." method="_on_stop_hojre_area_entered"]
+[connection signal="area_exited" from="StopHojre" to="." method="_on_stop_hojre_area_exited"]
+[connection signal="area_entered" from="StopVenstre" to="." method="_on_stop_venstre_area_entered"]
+[connection signal="area_entered" from="StartGron" to="." method="_on_start_gron_area_entered"]
+[connection signal="area_entered" from="MidteZone" to="." method="_on_midte_zone_area_entered"]

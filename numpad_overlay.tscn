@@ -12,6 +12,16 @@
 [ext_resource type="Texture2D" uid="uid://dqqr4rn7tddml" path="res://Sprites/NumPad-9-.png" id="10_a8pjm"]
 [ext_resource type="Texture2D" uid="uid://cpajlq7ijx2c3" path="res://Sprites/KioskKasseNumpad.png" id="11_ep8ml"]
 [ext_resource type="Shader" uid="uid://d35i86a05ijd7" path="res://numpad_overlay.gdshader" id="12_2x5ts"]
+[ext_resource type="Texture2D" uid="uid://bygsvbi2sfssi" path="res://Sprites/PressedNum/NumPadPress-1-.png" id="13_0hw2r"]
+[ext_resource type="Texture2D" uid="uid://diy1230fgl61p" path="res://Sprites/PressedNum/NumPadPress-2-.png" id="14_tue4b"]
+[ext_resource type="Texture2D" uid="uid://du6w4cmu350rm" path="res://Sprites/PressedNum/NumPadPress-3-.png" id="15_aec0r"]
+[ext_resource type="Texture2D" uid="uid://dyuojlbfy650c" path="res://Sprites/PressedNum/NumPadPress-4-.png" id="16_6xda0"]
+[ext_resource type="Texture2D" uid="uid://bcn4ed55ya01q" path="res://Sprites/PressedNum/NumPadPress-5-.png" id="17_ypo5a"]
+[ext_resource type="Texture2D" uid="uid://u3xo5p2nbtyb" path="res://Sprites/PressedNum/NumPadPress-6-.png" id="18_l6jju"]
+[ext_resource type="Texture2D" uid="uid://7uwyonertak8" path="res://Sprites/PressedNum/NumPadPress-7-.png" id="19_pp8nc"]
+[ext_resource type="Texture2D" uid="uid://ct0r2j0w07o0r" path="res://Sprites/PressedNum/NumPadPress-8-.png" id="20_nngm7"]
+[ext_resource type="Texture2D" uid="uid://b7cgadq5pjnxr" path="res://Sprites/PressedNum/NumPadPress-9-.png" id="21_1yecx"]
+[ext_resource type="Texture2D" uid="uid://qoh4gwilc4py" path="res://Sprites/PressedNum/NumPadPress-Enter-.png" id="22_7ik0x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2x5ts"]
 atlas = ExtResource("2_2x5ts")
@@ -52,6 +62,136 @@ region = Rect2(839.995, 659.992, 266, 450)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ox3iu"]
 shader = ExtResource("12_2x5ts")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tue4b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ep8ml"]
+atlas = ExtResource("13_0hw2r")
+region = Rect2(840, 749.99, 210, 270)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kxsx1"]
+texture = SubResource("AtlasTexture_ep8ml")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0hrsk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0hw2r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kxsx1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_io4yd"]
+atlas = ExtResource("14_tue4b")
+region = Rect2(839.992, 779.995, 210, 270)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vak82"]
+texture = SubResource("AtlasTexture_io4yd")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uhi5g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kc4jp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ep8ml"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6jju"]
+atlas = ExtResource("15_aec0r")
+region = Rect2(840.0052, 749.9892, 210, 270)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ypo5a"]
+texture = SubResource("AtlasTexture_l6jju")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aec0r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6xda0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pp8nc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1j3eb"]
+atlas = ExtResource("16_6xda0")
+region = Rect2(839.9926, 779.984, 210, 270)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7ik0x"]
+texture = SubResource("AtlasTexture_1j3eb")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nngm7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1yecx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_io4yd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qh46"]
+atlas = ExtResource("17_ypo5a")
+region = Rect2(839.9906, 749.98114, 210, 270)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2102t"]
+texture = SubResource("AtlasTexture_1qh46")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m6abh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mpdjj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3omo0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kcgr2"]
+atlas = ExtResource("18_l6jju")
+region = Rect2(840, 750, 210, 270)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kffhj"]
+texture = SubResource("AtlasTexture_kcgr2")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d7kni"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3flxs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t7c26"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_554eu"]
+atlas = ExtResource("19_pp8nc")
+region = Rect2(840, 780, 210, 270)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_10jte"]
+texture = SubResource("AtlasTexture_554eu")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_okeb8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_04wj0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ky17q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nx1ud"]
+atlas = ExtResource("20_nngm7")
+region = Rect2(840, 750, 210, 270)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fa2c0"]
+texture = SubResource("AtlasTexture_nx1ud")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_38msd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_codi5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yubw6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2q1cw"]
+atlas = ExtResource("21_1yecx")
+region = Rect2(840, 750, 210, 270)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xf42b"]
+texture = SubResource("AtlasTexture_2q1cw")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vv1e2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o20fa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y7w5m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2n50"]
+atlas = ExtResource("22_7ik0x")
+region = Rect2(510, 780, 870, 300)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cl2ls"]
+texture = SubResource("AtlasTexture_l2n50")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5gjm5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t1ntr"]
+
 [node name="NumpadOverlay" type="CanvasLayer" unique_id=1570609550]
 scale = Vector2(0.4, 0.4)
 transform = Transform2D(0.4, 0, 0, 0.4, 0, 0)
@@ -67,20 +207,20 @@ sprite_8 = SubResource("AtlasTexture_buca7")
 sprite_9 = SubResource("AtlasTexture_a8pjm")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1889242665]
-offset_left = 1409.9999
-offset_top = 429.99994
-offset_right = 3330.0
-offset_bottom = 2350.0
+offset_left = 1440.0
+offset_top = 390.0
+offset_right = 3360.0
+offset_bottom = 2310.0
 texture = ExtResource("11_ep8ml")
 
 [node name="ColorRect" type="ColorRect" parent="TextureRect" unique_id=2093968872]
 show_behind_parent = true
 material = SubResource("ShaderMaterial_ox3iu")
 layout_mode = 0
-offset_left = -1849.9998
-offset_top = -687.4999
-offset_right = 3972.4998
-offset_bottom = 2637.5
+offset_left = -1812.5
+offset_top = -735.0
+offset_right = 4009.9995
+offset_bottom = 2590.0
 
 [node name="DisplayContainer" type="HBoxContainer" parent="TextureRect" unique_id=889528546]
 layout_mode = 1
@@ -100,7 +240,10 @@ offset_left = 210.0
 offset_top = 450.0
 offset_right = 360.0
 offset_bottom = 660.0
-flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tue4b")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_kxsx1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_0hrsk")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0hw2r")
 
 [node name="Btn2" type="Button" parent="TextureRect" unique_id=117297231]
 layout_mode = 0
@@ -108,7 +251,10 @@ offset_left = 390.0
 offset_top = 450.0
 offset_right = 540.0
 offset_bottom = 660.0
-flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kxsx1")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_vak82")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_uhi5g")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kc4jp")
 
 [node name="Btn3" type="Button" parent="TextureRect" unique_id=1049038737]
 layout_mode = 0
@@ -116,7 +262,10 @@ offset_left = 570.0
 offset_top = 450.0
 offset_right = 720.0
 offset_bottom = 660.0
-flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ep8ml")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ypo5a")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_aec0r")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6xda0")
 
 [node name="Btn4" type="Button" parent="TextureRect" unique_id=1631399422]
 layout_mode = 0
@@ -124,7 +273,10 @@ offset_left = 211.0
 offset_top = 690.0
 offset_right = 361.0
 offset_bottom = 900.0
-flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pp8nc")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_7ik0x")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_nngm7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1yecx")
 
 [node name="Btn5" type="Button" parent="TextureRect" unique_id=1197521315]
 layout_mode = 0
@@ -132,7 +284,10 @@ offset_left = 391.0
 offset_top = 691.0
 offset_right = 541.0
 offset_bottom = 901.0
-flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_io4yd")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_2102t")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_m6abh")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mpdjj")
 
 [node name="Btn6" type="Button" parent="TextureRect" unique_id=162120241]
 layout_mode = 0
@@ -140,7 +295,10 @@ offset_left = 570.0
 offset_top = 691.0
 offset_right = 720.0
 offset_bottom = 901.0
-flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3omo0")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_kffhj")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_d7kni")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3flxs")
 
 [node name="Btn7" type="Button" parent="TextureRect" unique_id=2084967735]
 layout_mode = 0
@@ -148,7 +306,10 @@ offset_left = 211.0
 offset_top = 931.0
 offset_right = 361.0
 offset_bottom = 1141.0
-flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_t7c26")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_10jte")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_okeb8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_04wj0")
 
 [node name="Btn8" type="Button" parent="TextureRect" unique_id=518373488]
 layout_mode = 0
@@ -156,7 +317,10 @@ offset_left = 390.0
 offset_top = 929.0
 offset_right = 540.0
 offset_bottom = 1139.0
-flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ky17q")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_fa2c0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_38msd")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_codi5")
 
 [node name="Btn9" type="Button" parent="TextureRect" unique_id=342967032]
 layout_mode = 0
@@ -164,7 +328,10 @@ offset_left = 570.0
 offset_top = 929.0
 offset_right = 720.0
 offset_bottom = 1139.0
-flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_yubw6")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_xf42b")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vv1e2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_o20fa")
 
 [node name="BtnEnt" type="Button" parent="TextureRect" unique_id=708121933]
 layout_mode = 0
@@ -172,7 +339,10 @@ offset_left = 900.0
 offset_top = 1080.0
 offset_right = 1710.0
 offset_bottom = 1320.0
-flat = true
+theme_override_styles/normal = SubResource("StyleBoxEmpty_y7w5m")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_cl2ls")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5gjm5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_t1ntr")
 
 [connection signal="pressed" from="TextureRect/Btn1" to="." method="_on_btn_1_pressed"]
 [connection signal="pressed" from="TextureRect/Btn2" to="." method="_on_btn_2_pressed"]

@@ -4,17 +4,20 @@
 [ext_resource type="Texture2D" uid="uid://c167tjanccuvi" path="res://Midlertidig sprites/Gris.png" id="1_j10vx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ox3iu"]
-size = Vector2(206, 191)
+size = Vector2(175, 166.5)
 
 [node name="vare1" type="Area2D" unique_id=583075545]
 position = Vector2(707, 404)
 script = ExtResource("1_0x1ao")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2113665544]
-position = Vector2(-1, -1)
-scale = Vector2(0.68791944, 0.63804716)
+position = Vector2(-16.249987, -12.3749895)
+scale = Vector2(0.5855706, 0.5614479)
 texture = ExtResource("1_j10vx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1811382939]
-position = Vector2(-1, 0)
+position = Vector2(-16.5, -12.25)
 shape = SubResource("RectangleShape2D_ox3iu")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

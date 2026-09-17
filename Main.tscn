@@ -1,12 +1,7 @@
 [gd_scene format=3 uid="uid://cbe3s5boymfnx"]
 
 [ext_resource type="PackedScene" uid="uid://ht10f3vv58b4" path="res://Kassebånd.tscn" id="1_r0du0"]
-[ext_resource type="PackedScene" uid="uid://qaqb7lxa80jc" path="res://vare_midlertid.tscn" id="3_r0du0"]
 
 [node name="Kasse" type="Node2D" unique_id=1979425226]
 
 [node name="Kassebånd" parent="." unique_id=1732336203 instance=ExtResource("1_r0du0")]
-
-[node name="Gris" parent="." unique_id=197794780 instance=ExtResource("3_r0du0")]
-position = Vector2(1457, 947)
-scale = Vector2(0.6375839, 0.7222222)
