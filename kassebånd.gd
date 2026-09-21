@@ -34,6 +34,7 @@ var mulige_varer = [
 # Husk at rette -100 til det tal, du faktisk valgte som hastighed på dine varer!
 var normal_hastighed = -100.0
 var hojre_baand_korer = true # Viser om båndet køre
+const KUNDE_SCENE = preload("res://vare_scener/kunde_martin.tscn") # Vær sikker på stien er korrekt!
 
 func _ready():
 	# Starter funktionen når spillet begynder (du kan også sætte dette på en knap eller når en NPC ankommer)
@@ -41,22 +42,30 @@ func _ready():
 
 func spawn_kunde_varer():
 	var antal_varer = randi_range(1, 10)
-	print("En kunde er ankommet med ", antal_varer, " varer!")
+	print("Ny kunde ankommer med ", antal_varer, " varer!")
 	
-	# Hvor mange pixels skal der cirka være mellem hver vare? 
-	# (Juster dette tal så det passer med bredden på din største vare)
+	# Spawn selve kunden
+	var ny_kunde = KUNDE_SCENE.instantiate()
+	add_child(ny_kunde)
+	
+	# Sæt koordinaterne for, hvor kunden starter (uden for skærmen) og hvor kunden skal stå (ved pulten)
+	# (Du skal sandsynligvis justere disse Vector2-tal, så de passer til dit spils opløsning)
+	var start_pos = Vector2(200, -500) 
+	var slut_pos = Vector2(200, 600)
+	
+	ny_kunde.start_kunde(antal_varer, start_pos, slut_pos)
+	
+	# Forbind kundens afgang til at starte denne funktion forfra = uendeligt loop!
+	ny_kunde.kunde_faerdig.connect(spawn_kunde_varer)
+	
 	var afstand_mellem_varer = 250 
 	
 	for i in range(antal_varer):
 		var ny_vare = mulige_varer.pick_random().instantiate()
+		var spawn_pos = spawn_punkt.global_position
+		spawn_pos.x += i * afstand_mellem_varer
+		ny_vare.global_position = spawn_pos
 		
-		# Udregn en ny position. Den første får +0, næste får +250, næste får +500 osv.
-		var start_position = spawn_punkt.global_position
-		start_position.x += i * afstand_mellem_varer
-		
-		ny_vare.global_position = start_position
-		
-		# Tjek om båndet holder stille lige nu
 		if hojre_baand_korer == false:
 			ny_vare.saet_fart(0)
 		else:

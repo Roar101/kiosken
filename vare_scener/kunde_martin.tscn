@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://hjy8f2n4okgx"]
+
+[ext_resource type="Script" uid="uid://bjmatglhid0mm" path="res://kunde.gd" id="1_k7lpy"]
+[ext_resource type="Texture2D" uid="uid://c60py2fkny0hp" path="res://Sprites/NPCs/KioskCha-Martin-.png" id="2_gm8xw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ox3iu"]
+atlas = ExtResource("2_gm8xw")
+region = Rect2(0, 120, 1920, 1800)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ox3iu"]
+size = Vector2(128, 315)
+
+[node name="Kunde" type="Node2D" unique_id=1813119709]
+script = ExtResource("1_k7lpy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1338352847]
+scale = Vector2(0.2, 0.2)
+texture = SubResource("AtlasTexture_ox3iu")
+
+[node name="PakkeZone" type="Area2D" parent="." unique_id=463141185]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PakkeZone" unique_id=547027998]
+position = Vector2(-59, 333.5)
+shape = SubResource("RectangleShape2D_ox3iu")
+
+[node name="PakkeTimer" type="Timer" parent="." unique_id=668617313]
+one_shot = true
+
+[connection signal="area_entered" from="PakkeZone" to="." method="_on_pakke_zone_area_entered"]
+[connection signal="timeout" from="PakkeTimer" to="." method="_on_pakke_timer_timeout"]

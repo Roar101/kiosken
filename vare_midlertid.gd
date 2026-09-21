@@ -14,6 +14,9 @@ func _ready():
 	# Så snart varen spawner, bliver den en del af højre bånd
 	add_to_group("hojre_baand")
 	
+	# NYT: Sæt automatisk varen i vare-gruppen, så NPC'en kan kende den
+	add_to_group("vare")
+	
 # Ny funktion som kassebåndet kan bruge til at styre denne vare
 func saet_fart(ny_fart):
 	baand_fart = ny_fart
