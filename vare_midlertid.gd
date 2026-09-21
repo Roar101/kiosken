@@ -52,17 +52,20 @@ func _process(delta):
 		global_position = target_pos
 		
 	else:
-		# NYT: Kø-system
+		# Kø-system
 		if genstand_foran != null:
-			# 1. Følg hastigheden fra varen foran (hvis den er 0, stopper vi også)
+			# 1. Følg hastigheden fra varen foran
 			global_position.x += genstand_foran.baand_fart * delta
 			
-			# 2. Forhindr visuelt overlap!
-			# Vi beregner varens bredde og trækker 1 pixel fra, så de akkurat beholder kontakten
-			var boks_bredde = min_kollision.shape.size.x
-			var min_afstand = boks_bredde - 1 
+			# 2. DYNAMISK AFSTAND: Find begge varers halve bredde
+			var min_halve_bredde = min_kollision.shape.size.x / 2.0
+			var foran_halve_bredde = genstand_foran.get_node("CollisionShape2D").shape.size.x / 2.0
 			
-			# Hvis varen kører længere ind end den tilladte afstand, skubber vi den tilbage
+			# Læg dem sammen for at få den perfekte center-til-center afstand
+			# Vi trækker 5 pixels fra, så de danner et lille, stabilt overlap
+			var min_afstand = min_halve_bredde + foran_halve_bredde - 5.0
+			
+			# Skub tilbage hvis den kører for tæt på
 			if global_position.x < genstand_foran.global_position.x + min_afstand:
 				global_position.x = genstand_foran.global_position.x + min_afstand
 				

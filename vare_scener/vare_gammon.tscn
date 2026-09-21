@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://du3t08dy6cwa1"]
+
+[ext_resource type="Script" uid="uid://dyc25d5j21p5a" path="res://vare_midlertid.gd" id="1_8rpa6"]
+[ext_resource type="Texture2D" uid="uid://cq26a82ik0glm" path="res://Sprites/Cozy_Groceries_Free_Starter_Pack/Cozy_Groceries_Free_Starter_Pack/Individual PNG/Cozy_Groceries_gammon.png" id="2_8rpa6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwxv7"]
+atlas = ExtResource("2_8rpa6")
+region = Rect2(0, 4, 32, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ox3iu"]
+size = Vector2(160, 134)
+
+[node name="vare1" type="Area2D" unique_id=583075545]
+position = Vector2(707, 404)
+script = ExtResource("1_8rpa6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2113665544]
+position = Vector2(-16.249987, -12.3749895)
+scale = Vector2(5, 4.786)
+texture = SubResource("AtlasTexture_vwxv7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1811382939]
+position = Vector2(-16, -13)
+shape = SubResource("RectangleShape2D_ox3iu")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
