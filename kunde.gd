@@ -29,7 +29,7 @@ func _on_pakke_zone_area_entered(area):
 
 func pakke_en_vare():
 	# Sæt et random tempo mellem 0.5 og 1.5 sekunder
-	pakke_timer.wait_time = randf_range(0.5, 3.0)
+	pakke_timer.wait_time = randf_range(0.5, 4.5)
 	pakke_timer.start()
 
 # Når timeren udløber (kunden tager varen)
