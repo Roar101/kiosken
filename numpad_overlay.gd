@@ -57,4 +57,12 @@ func _on_btn_enter_pressed():
 
 
 func _on_btn_ent_pressed() -> void:
-	pass # Replace with function body.
+	# Sender koden direkte til kassebåndets validerings-funktion
+	get_tree().call_group("kassebaand_system", "valider_indtastet_kode", indtastet_kode)
+	
+	ryd_skaerm()
+	queue_free() # Lukker overlayet
+
+
+func _on_luk_knap_pressed() -> void:
+	queue_free() # Sletter numpad-overlayet, så det forsvinder

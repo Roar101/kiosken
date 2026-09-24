@@ -10,6 +10,9 @@ var er_paa_midten = false
 # Henter CollisionShape2D-noden automatisk
 @onready var min_kollision = $CollisionShape2D
 
+@export var skal_tastes: bool = false
+@export var stregkode: String = ""
+
 func _ready():
 	# Så snart varen spawner, bliver den en del af højre bånd
 	add_to_group("hojre_baand")

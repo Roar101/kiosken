@@ -36,7 +36,7 @@ size = Vector2(525, 238)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3uk5g"]
 size = Vector2(225, 136)
 
-[node name="Kassebånd" type="Area2D" unique_id=1732336203]
+[node name="Kassebånd" type="Area2D" unique_id=1732336203 groups=["kassebaand_system"]]
 script = ExtResource("1_7415g")
 
 [node name="MainBånd" type="Sprite2D" parent="." unique_id=591156797]
@@ -64,7 +64,7 @@ script = ExtResource("2_grmvp")
 position = Vector2(952.5, 952.5)
 shape = SubResource("RectangleShape2D_ox3iu")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Scanner" unique_id=1788078975]
+[node name="BipLyd" type="AudioStreamPlayer" parent="Scanner" unique_id=1788078975]
 stream = ExtResource("3_l67pu")
 
 [node name="NumpadKnap" type="Area2D" parent="." unique_id=677597772]

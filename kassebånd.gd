@@ -2,30 +2,31 @@ extends Area2D
 
 # Træk de gemte scener for dine varer (.tscn filer) fra FileSystem ind her
 var mulige_varer = [
-	preload("res://vare_scener/vare_bread.tscn"),
-	preload("res://vare_scener/vare_butter.tscn"),
-	preload("res://vare_scener/vare_cereal.tscn"),
-	preload("res://vare_scener/vare_chicken.tscn"),
-	preload("res://vare_scener/vare_chickenSoup.tscn"),
-	preload("res://vare_scener/vare_detergentBlue.tscn"),
-	preload("res://vare_scener/vare_detergentPink.tscn"),
-	preload("res://vare_scener/vare_eggs4.tscn"),
-	preload("res://vare_scener/vare_flakes.tscn"),
-	preload("res://vare_scener/vare_flour.tscn"),
-	preload("res://vare_scener/vare_gammon.tscn"),
-	preload("res://vare_scener/vare_icecream.tscn"),
-	preload("res://vare_scener/vare_milk.tscn"),
-	preload("res://vare_scener/vare_OJ.tscn"),
-	preload("res://vare_scener/vare_pudding.tscn"),
-	preload("res://vare_scener/vare_Salmon.tscn"),
-	preload("res://vare_scener/vare_soup.tscn"),
-	preload("res://vare_scener/vare_spam.tscn"),
-	preload("res://vare_scener/vare_Steak.tscn"),
-	preload("res://vare_scener/vare_sugar.tscn"),
-	preload("res://vare_scener/vare_tissue.tscn"),
-	preload("res://vare_scener/vare_tomato.tscn"),
-	preload("res://vare_scener/vare_tuna.tscn"),
-	preload("res://vare_scener/vare_water.tscn"),
+	#preload("res://vare_scener/vare_bread.tscn"),
+	#preload("res://vare_scener/vare_butter.tscn"),
+	#preload("res://vare_scener/vare_cereal.tscn"),
+	#preload("res://vare_scener/vare_chicken.tscn"),
+	#preload("res://vare_scener/vare_chickenSoup.tscn"),
+	#preload("res://vare_scener/vare_detergentBlue.tscn"),
+	#preload("res://vare_scener/vare_detergentPink.tscn"),
+	#preload("res://vare_scener/vare_eggs4.tscn"),
+	#preload("res://vare_scener/vare_flakes.tscn"),
+	#preload("res://vare_scener/vare_flour.tscn"),
+	#preload("res://vare_scener/vare_gammon.tscn"),
+	#preload("res://vare_scener/vare_icecream.tscn"),
+	#preload("res://vare_scener/vare_milk.tscn"),
+	#preload("res://vare_scener/vare_OJ.tscn"),
+	#preload("res://vare_scener/vare_pudding.tscn"),
+	#preload("res://vare_scener/vare_Salmon.tscn"),
+	#preload("res://vare_scener/vare_soup.tscn"),
+	#preload("res://vare_scener/vare_spam.tscn"),
+	#preload("res://vare_scener/vare_Steak.tscn"),
+	#preload("res://vare_scener/vare_sugar.tscn"),
+	#preload("res://vare_scener/vare_tissue.tscn"),
+	#preload("res://vare_scener/vare_tomato.tscn"),
+	#preload("res://vare_scener/vare_tuna.tscn"),
+	#preload("res://vare_scener/vare_water.tscn"),
+	preload("res://vare_scener/vare_banan.tscn"),
 	# Du kan tilføje flere varer her, adskilt af komma, når du har lavet dem:
 	# preload("res://en_anden_vare.tscn")
 ]
@@ -35,6 +36,7 @@ var mulige_varer = [
 var normal_hastighed = -100.0
 var hojre_baand_korer = true # Viser om båndet køre
 const KUNDE_SCENE = preload("res://vare_scener/kunde_martin.tscn") # Vær sikker på stien er korrekt!
+var aktuel_vare = null # Holder styr på den vare, der ligger på scanneren
 
 func _ready():
 	# Starter funktionen når spillet begynder (du kan også sætte dette på en knap eller når en NPC ankommer)
@@ -107,7 +109,23 @@ func _on_midte_zone_area_entered(area):
 		
 	if area.has_method("frys_paa_midten"):
 		area.frys_paa_midten(true)
+		aktuel_vare = area # Gem varen
+		
+		print("Varen hedder: ", area.name, " | Skal tastes: ", area.skal_tastes)
+			
+		if area.skal_tastes == false:
+			$Scanner/BipLyd.play()
 
 
 func _on_bog_klik_zone_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	pass # Replace with function body.
+	
+func valider_indtastet_kode(tastet_kode):
+	# Tjekker om der ligger en vare, om den skal tastes, og om koden er rigtig
+	if aktuel_vare != null and "stregkode" in aktuel_vare:
+		if aktuel_vare.skal_tastes and aktuel_vare.stregkode == tastet_kode:
+			aktuel_vare.frys_paa_midten(false) # Start kørslen igen!
+			aktuel_vare = null # Gør plads til næste vare
+			print("Korrekt kode! Varen kører videre.")
+		else:
+			print("Forkert kode eller varen skal ikke tastes!")
