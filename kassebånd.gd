@@ -42,7 +42,6 @@ func _ready():
 
 func spawn_kunde_varer():
 	var antal_varer = randi_range(1, 10)
-	print("Ny kunde ankommer med ", antal_varer, " varer!")
 	
 	# Spawn selve kunden
 	var ny_kunde = KUNDE_SCENE.instantiate()
