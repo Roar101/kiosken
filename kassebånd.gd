@@ -48,6 +48,7 @@ func spawn_kunde_varer():
 	var ny_kunde = KUNDE_SCENE.instantiate()
 	add_child(ny_kunde)
 	
+	
 	# Sæt koordinaterne for, hvor kunden starter (uden for skærmen) og hvor kunden skal stå (ved pulten)
 	# (Du skal sandsynligvis justere disse Vector2-tal, så de passer til dit spils opløsning)
 	var start_pos = Vector2(200, -500) 
