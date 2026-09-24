@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://dcicllib40ghx"]
+
+[ext_resource type="Script" uid="uid://d4fgcyt14te4w" path="res://bog_overlay.gd" id="1_4dqc7"]
+[ext_resource type="Texture2D" uid="uid://bmjpsoupk08hl" path="res://Sprites/Cozy_Groceries_Free_Starter_Pack/Cozy_Groceries_Free_Starter_Pack/Individual PNG/KioskGrntABogBase.png" id="2_ptpyi"]
+[ext_resource type="Shader" uid="uid://bnnb8vp54svxh" path="res://bog_overlay.gdshader" id="2_u71a6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ox3iu"]
+shader = ExtResource("2_u71a6")
+shader_parameter/blur_amount = 2.5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ox3iu"]
+atlas = ExtResource("2_ptpyi")
+region = Rect2(120, 360, 1680, 1110)
+
+[node name="BogOverlay" type="CanvasLayer" unique_id=1054519431]
+script = ExtResource("1_4dqc7")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1173060893]
+material = SubResource("ShaderMaterial_ox3iu")
+anchors_preset = -1
+anchor_left = -0.07395833
+anchor_top = -0.119444445
+anchor_right = 1.0927083
+anchor_bottom = 1.0962963
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=485270539]
+offset_left = 582.0
+offset_top = 290.0
+offset_right = 2262.0
+offset_bottom = 1400.0
+scale = Vector2(0.45, 0.45)
+texture = SubResource("AtlasTexture_ox3iu")
+
+[node name="Button" type="Button" parent="TextureRect" unique_id=708193244]
+layout_mode = 0
+offset_left = -1886.6665
+offset_top = -1175.5557
+offset_right = 3588.8892
+offset_bottom = 2113.3335
+flat = true
+
+[connection signal="pressed" from="TextureRect/Button" to="." method="_on_button_pressed"]

@@ -106,3 +106,7 @@ func _on_midte_zone_area_entered(area):
 		
 	if area.has_method("frys_paa_midten"):
 		area.frys_paa_midten(true)
+
+
+func _on_bog_klik_zone_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	pass # Replace with function body.
