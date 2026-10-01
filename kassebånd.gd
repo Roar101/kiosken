@@ -27,6 +27,10 @@ var mulige_varer = [
 	preload("res://vare_scener/vare_tuna.tscn"),
 	preload("res://vare_scener/vare_water.tscn"),
 	preload("res://vare_scener/vare_banan.tscn"),
+	preload("res://vare_scener/vare_aeble.tscn"),
+	preload("res://vare_scener/vare_guleroed.tscn"),
+	preload("res://vare_scener/vare_tomat.tscn"),
+	preload("res://vare_scener/vare_paere.tscn"),
 	# Du kan tilføje flere varer her, adskilt af komma, når du har lavet dem:
 	# preload("res://en_anden_vare.tscn")
 ]
