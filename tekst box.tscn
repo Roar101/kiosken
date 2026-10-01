@@ -3,18 +3,17 @@
 [ext_resource type="Script" uid="uid://di4s85ns05v2g" path="res://tekst_box.gd" id="1_y7o7v"]
 [ext_resource type="Texture2D" uid="uid://7o7tx3d860re" path="res://KioskTestBox.png" id="2_xhvex"]
 [ext_resource type="FontFile" uid="uid://b834aa4xwpxx6" path="res://VCR_OSD_MONO_1.001.ttf" id="3_3nhuw"]
+[ext_resource type="AudioStream" uid="uid://00dke1r87qk" path="res://Video Project 2 reeal.mp3" id="4_xhvex"]
 
-[node name="text box" type="MarginContainer" unique_id=2088778747]
-offset_left = 14.0
-offset_top = -6.0
-offset_right = 1422.0
-offset_bottom = 1194.0
+[node name="text_box" type="MarginContainer" unique_id=2088778747]
+offset_right = 1408.0
+offset_bottom = 1200.0
+scale = Vector2(0.1, 0.1)
 script = ExtResource("1_y7o7v")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1700835829]
 layout_mode = 2
 texture = ExtResource("2_xhvex")
-region_rect = Rect2(-16, 0, 1968, 1856)
 patch_margin_left = 672
 patch_margin_top = 624
 patch_margin_right = 736
@@ -22,19 +21,33 @@ patch_margin_bottom = 576
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1398403325]
 layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 70
 
 [node name="Label" type="Label" parent="MarginContainer" unique_id=1153322128]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.011764706, 0.011764706, 0.011764706, 1)
+theme_override_colors/font_color = Color(0.97060233, 0.97060245, 0.97060233, 1)
 theme_override_fonts/font = ExtResource("3_3nhuw")
-theme_override_font_sizes/font_size = 300
+theme_override_font_sizes/font_size = 160
 vertical_alignment = 1
 
 [node name="LetterDisplayTimer" type="Timer" parent="." unique_id=948781615]
 one_shot = true
+
+[node name="LetterSound" type="AudioStreamPlayer" parent="." unique_id=587183386]
+stream = ExtResource("4_xhvex")
+autoplay = true
+
+[node name="Choices" type="VBoxContainer" parent="." unique_id=593108071]
+visible = false
+layout_mode = 2
+
+[node name="Choice1" type="Button" parent="Choices" unique_id=315902056]
+layout_mode = 2
+
+[node name="Choice2" type="Button" parent="Choices" unique_id=442813916]
+layout_mode = 2
 
 [connection signal="timeout" from="LetterDisplayTimer" to="." method="_on_letter_display_timer_timeout"]

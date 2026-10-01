@@ -1,58 +1,199 @@
 extends Node2D
 
+const CHOICE_OVERLAY_SCENE = preload("res://choice_overlay.tscn")
+
 var forventede_varer = 0
 var indsamlede_varer = 0
+var scannede_varer = 0
 var varer_klar_til_pakning = []
 
-# Dette signal fortæller hovedspillet, at næste kunde kan komme
+var intro_faerdig = false
+var kan_klikkes = false
+var overlay_aaben = false
+var har_svaret = false
+var pakning_faerdig = false
+var forlader = false
+
 signal kunde_faerdig
 
 @onready var pakke_timer = $PakkeTimer
 
-# Kaldes af kassebåndet når kunden spawner
+
+const intro_lines: Array[String] = [
+	"Hej!",
+	"Jeg vil gerne betale for mine varer."
+]
+
+
 func start_kunde(antal, start_position, pult_position):
 	forventede_varer = antal
 	global_position = start_position
-	
-	# Tween får kunden til at glide pænt ind på plads på 2 sekunder
-	var tween = create_tween()
-	tween.tween_property(self, "global_position", pult_position, 2.0)
 
-# Når en vare ruller ind i pakkezonen (venstre side af båndet)
+	var tween = create_tween()
+	tween.tween_property(
+		self,
+		"global_position",
+		pult_position,
+		2.0
+	)
+
+	await tween.finished
+
+	await DialogManager.start_dialog(
+		global_position + Vector2(-100, -300),
+		intro_lines
+	)
+
+	intro_faerdig = true
+	_opdater_klik()
+
+
+func registrer_scannet_vare():
+	scannede_varer += 1
+
+	print(
+		"Scannede varer: ",
+		scannede_varer,
+		"/",
+		forventede_varer
+	)
+
+	_opdater_klik()
+
+
+func _opdater_klik():
+	kan_klikkes = (
+		intro_faerdig
+		and scannede_varer >= forventede_varer
+		and not overlay_aaben
+		and not har_svaret
+	)
+
+
 func _on_pakke_zone_area_entered(area):
 	if area.is_in_group("vare"):
-		varer_klar_til_pakning.append(area)
-		
-		# Hvis kunden ikke allerede er i gang med at pakke en vare, startes timeren
+		if not varer_klar_til_pakning.has(area):
+			varer_klar_til_pakning.append(area)
+
 		if pakke_timer.is_stopped():
 			pakke_en_vare()
 
+
 func pakke_en_vare():
-	# Sæt et random tempo mellem 0.5 og 1.5 sekunder
+	if varer_klar_til_pakning.is_empty():
+		return
+
 	pakke_timer.wait_time = randf_range(0.5, 4.5)
 	pakke_timer.start()
 
-# Når timeren udløber (kunden tager varen)
+
 func _on_pakke_timer_timeout():
-	if varer_klar_til_pakning.size() > 0:
-		var aktuel_vare = varer_klar_til_pakning.pop_front()
-		
-		# Tjekker om varen stadig findes (hvis spilleren f.eks. trak i den)
-		if is_instance_valid(aktuel_vare):
-			aktuel_vare.queue_free() # Sletter varen helt fra spillet
-			indsamlede_varer += 1
-			
-		# Tjek om vi er færdige
-		if indsamlede_varer >= forventede_varer:
+	if varer_klar_til_pakning.is_empty():
+		return
+
+	var aktuel_vare = varer_klar_til_pakning.pop_front()
+
+	if is_instance_valid(aktuel_vare):
+		aktuel_vare.queue_free()
+		indsamlede_varer += 1
+
+		print(
+			"Pakkede varer: ",
+			indsamlede_varer,
+			"/",
+			forventede_varer
+		)
+
+	# Kunden har taget alle sine varer
+	if indsamlede_varer >= forventede_varer:
+		pakning_faerdig = true
+
+		# Hvis spilleren allerede har svaret,
+		# må kunden gå nu
+		if har_svaret:
 			forlad_butikken()
-		elif varer_klar_til_pakning.size() > 0:
-			pakke_en_vare() # Tag næste vare i køen
+
+		return
+
+	# Pak næste vare
+	if varer_klar_til_pakning.size() > 0:
+		pakke_en_vare()
+
+
+func _input(event):
+	if not kan_klikkes:
+		return
+
+	if overlay_aaben:
+		return
+
+	if har_svaret:
+		return
+
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+
+			var mouse_pos = $Sprite2D.to_local(
+				get_global_mouse_position()
+			)
+
+			if $Sprite2D.get_rect().has_point(mouse_pos):
+				kan_klikkes = false
+				overlay_aaben = true
+
+				var overlay = CHOICE_OVERLAY_SCENE.instantiate()
+				get_tree().root.add_child(overlay)
+
+				overlay.setup(
+					"Er alle mine varer blevet scannet?",
+					"Ja, alle dine varer er scannet!",
+					"Nej, jeg mangler stadig nogle."
+				)
+
+				overlay.choice_selected.connect(
+					_on_choice_selected
+				)
+
+
+func _on_choice_selected(correct: bool):
+	overlay_aaben = false
+	har_svaret = true
+	kan_klikkes = false
+
+	if correct:
+		await DialogManager.start_dialog(
+			global_position + Vector2(-100, -300),
+			["Perfekt, tak for hjælpen!"]
+		)
+	else:
+		await DialogManager.start_dialog(
+			global_position + Vector2(-100, -300),
+			["Hvad?! Det er da dårlig service!"]
+		)
+
+	# Hvis kunden allerede har taget alle varerne,
+	# går kunden nu
+	if pakning_faerdig:
+		forlad_butikken()
+
 
 func forlad_butikken():
+	if forlader:
+		return
+
+	forlader = true
+	kan_klikkes = false
+
 	var tween = create_tween()
-	# Får kunden til at glide op af skærmen (Y = -500) på 1 sekund
-	tween.tween_property(self, "global_position:y", -500, 1.0)
-	await tween.finished # Vent til animationen er slut
-	
-	kunde_faerdig.emit() # Giv besked til Kassebåndet
-	queue_free() # Slet kunden
+
+	tween.tween_property(
+		self,
+		"global_position:y",
+		-500,
+		1.0
+	)
+
+	await tween.finished
+
+	kunde_faerdig.emit()
+	queue_free()

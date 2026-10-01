@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://vrlk4siiwkap"]
+
+[ext_resource type="Script" uid="uid://8ho3351nxteo" path="res://choice_overlay.gd" id="1_qxf7b"]
+
+[node name="ChoiceOverlay" type="CanvasLayer" unique_id=1675081611]
+script = ExtResource("1_qxf7b")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1939458291]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ChoicesBox" type="VBoxContainer" parent="ColorRect" unique_id=142484038]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -23.5
+offset_right = 20.0
+offset_bottom = 23.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="QuestionLabel" type="Label" parent="ColorRect/ChoicesBox" unique_id=1053507225]
+layout_mode = 2
+
+[node name="Choice1" type="Button" parent="ColorRect/ChoicesBox" unique_id=1963541841]
+layout_mode = 2
+
+[node name="Choice2" type="Button" parent="ColorRect/ChoicesBox" unique_id=224726938]
+layout_mode = 2

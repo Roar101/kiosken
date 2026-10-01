@@ -1,59 +1,92 @@
 extends Node
 
-
 @onready var text_box_scene = preload("res://tekst box.tscn")
 
-
-var dialog_lines: Array[String] = []
-var current_line_index = 0
-
-var text_box
-var text_box_position: Vector2
+signal dialog_finished
 
 var is_dialog_active = false
-var can_advance_line = false
- 
+
 
 func start_dialog(position: Vector2, lines: Array[String]):
 	if is_dialog_active:
 		return
-		
-	dialog_lines = lines
-	text_box_position = position
-	_show_text_box()
-	
+
 	is_dialog_active = true
-	
 
-func _show_text_box():
-	text_box = text_box_scene.instantiate()
-	text_box.finished_displaying.connect(_on_text_box_finished_displaying)
+	for line in lines:
+		var text_box = text_box_scene.instantiate()
+		get_tree().root.add_child(text_box)
+
+		text_box.global_position = position
+		text_box.display_text(line)
+
+		await get_tree().create_timer(3.0).timeout
+
+		if is_instance_valid(text_box):
+			text_box.queue_free()
+
+		await get_tree().process_frame
+
+	is_dialog_active = false
+	
+	# Fortæl at dialogen er færdig
+	dialog_finished.emit()
+
+
+func start_choice_dialog(
+	position: Vector2,
+	question: String,
+	first_choice: String,
+	second_choice: String,
+	correct_response: String,
+	wrong_response: String
+):
+	if is_dialog_active:
+		return
+
+	is_dialog_active = true
+
+	var text_box = text_box_scene.instantiate()
 	get_tree().root.add_child(text_box)
-	text_box.global_position = text_box_position
-	text_box.display_text(dialog_lines[current_line_index])
-	can_advance_line = false
-	
-	
-func _on_text_box_finished_displaying():
-	can_advance_line = true
-	
-	
-func _unhandled_input(event):
-	if (
-		event.is_action_pressed("advance_dialog") &&  
-		is_dialog_active && 
-		can_advance_line
-	):
-		text_box.queue_free()
-		
-		current_line_index += 1
-		if current_line_index >= dialog_lines.size():
-			is_dialog_active = false
-			current_line_index = 0
-			return
-			
-		_show_text_box()
-	
-		
 
+	text_box.global_position = position
+
+	# Vis spørgsmålet
+	text_box.display_text(question)
+
+	# Vent til spørgsmålet er skrevet færdigt
+	await text_box.finished_displaying
+
+	# Vis de 2 svar
+	text_box.show_choices(first_choice, second_choice)
+
+	# Vent på spillerens valg
+	var correct = await text_box.choice_selected
+
+	# Fjern den gamle tekstboks
+	if is_instance_valid(text_box):
+		text_box.queue_free()
+
+	await get_tree().process_frame
+
+	# Lav en ny tekstboks til kundens svar
+	var response_box = text_box_scene.instantiate()
+	get_tree().root.add_child(response_box)
+
+	response_box.global_position = position
+
+	if correct:
+		response_box.display_text(correct_response)
+	else:
+		response_box.display_text(wrong_response)
+
+	# Vent 3 sekunder
+	await get_tree().create_timer(3.0).timeout
+
+	if is_instance_valid(response_box):
+		response_box.queue_free()
+
+	is_dialog_active = false
 	
+	# Fortæl at dialogen er færdig
+	dialog_finished.emit()

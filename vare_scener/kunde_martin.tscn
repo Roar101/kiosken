@@ -8,7 +8,9 @@ atlas = ExtResource("2_gm8xw")
 region = Rect2(0, 120, 1920, 1800)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ox3iu"]
-size = Vector2(128, 315)
+size = Vector2(382, 357.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1jh1"]
 
 [node name="Kunde" type="Node2D" unique_id=1813119709]
 script = ExtResource("1_k7lpy")
@@ -20,11 +22,17 @@ texture = SubResource("AtlasTexture_ox3iu")
 [node name="PakkeZone" type="Area2D" parent="." unique_id=463141185]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PakkeZone" unique_id=547027998]
-position = Vector2(-59, 333.5)
+position = Vector2(0, -1.25)
 shape = SubResource("RectangleShape2D_ox3iu")
 
 [node name="PakkeTimer" type="Timer" parent="." unique_id=668617313]
 one_shot = true
 
+[node name="ClickArea" type="Area2D" parent="." unique_id=1935809742]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=1190936093]
+shape = SubResource("RectangleShape2D_w1jh1")
+
 [connection signal="area_entered" from="PakkeZone" to="." method="_on_pakke_zone_area_entered"]
 [connection signal="timeout" from="PakkeTimer" to="." method="_on_pakke_timer_timeout"]
+[connection signal="input_event" from="ClickArea" to="." method="_on_click_area_input_event"]
