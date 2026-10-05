@@ -30,6 +30,7 @@ func start_kunde(antal, start_position, pult_position):
 	global_position = start_position
 
 	var tween = create_tween()
+
 	tween.tween_property(
 		self,
 		"global_position",
@@ -72,6 +73,7 @@ func _opdater_klik():
 
 func _on_pakke_zone_area_entered(area):
 	if area.is_in_group("vare"):
+
 		if not varer_klar_til_pakning.has(area):
 			varer_klar_til_pakning.append(area)
 
@@ -104,18 +106,14 @@ func _on_pakke_timer_timeout():
 			forventede_varer
 		)
 
-	# Kunden har taget alle sine varer
 	if indsamlede_varer >= forventede_varer:
 		pakning_faerdig = true
 
-		# Hvis spilleren allerede har svaret,
-		# må kunden gå nu
 		if har_svaret:
 			forlad_butikken()
 
 		return
 
-	# Pak næste vare
 	if varer_klar_til_pakning.size() > 0:
 		pakke_en_vare()
 
@@ -131,17 +129,23 @@ func _input(event):
 		return
 
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+
+		if (
+			event.button_index == MOUSE_BUTTON_LEFT
+			and event.pressed
+		):
 
 			var mouse_pos = $Sprite2D.to_local(
 				get_global_mouse_position()
 			)
 
 			if $Sprite2D.get_rect().has_point(mouse_pos):
+
 				kan_klikkes = false
 				overlay_aaben = true
 
 				var overlay = CHOICE_OVERLAY_SCENE.instantiate()
+
 				get_tree().root.add_child(overlay)
 
 				overlay.setup(
@@ -161,18 +165,27 @@ func _on_choice_selected(correct: bool):
 	kan_klikkes = false
 
 	if correct:
+
+		GameState.change_tilfredshed(1)
+
 		await DialogManager.start_dialog(
 			global_position + Vector2(-100, -300),
-			["Perfekt, tak for hjælpen!"]
-		)
-	else:
-		await DialogManager.start_dialog(
-			global_position + Vector2(-100, -300),
-			["Hvad?! Det er da dårlig service!"]
+			[
+				"Perfekt, tak for hjælpen!"
+			]
 		)
 
-	# Hvis kunden allerede har taget alle varerne,
-	# går kunden nu
+	else:
+
+		GameState.change_tilfredshed(-1)
+
+		await DialogManager.start_dialog(
+			global_position + Vector2(-100, -300),
+			[
+				"Hvad?! Det er da dårlig service!"
+			]
+		)
+
 	if pakning_faerdig:
 		forlad_butikken()
 
