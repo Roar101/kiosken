@@ -31,9 +31,8 @@ var mulige_varer = [
 
 var normal_hastighed = -100.0
 var hojre_baand_korer = true
-var aktiv_kunde = null
-
 const KUNDE_SCENE = preload("res://vare_scener/kunde_martin.tscn")
+var aktuel_vare = null
 
 func _ready():
 	GameState.start_vagt(120.0)
@@ -46,7 +45,7 @@ func spawn_kunde_varer():
 	var ny_kunde = KUNDE_SCENE.instantiate()
 	add_child(ny_kunde)
 
-	aktiv_kunde = ny_kunde
+
 
 	var start_pos = Vector2(200, -500)
 	var slut_pos = Vector2(200, 600)
@@ -63,10 +62,8 @@ func spawn_kunde_varer():
 
 	for i in range(antal_varer):
 		var ny_vare = mulige_varer.pick_random().instantiate()
-
 		var spawn_pos = spawn_punkt.global_position
 		spawn_pos.x += i * afstand_mellem_varer
-
 		ny_vare.global_position = spawn_pos
 
 		if hojre_baand_korer == false:
@@ -113,10 +110,19 @@ func _on_midte_zone_area_entered(area):
 
 	if area.has_method("frys_paa_midten"):
 		area.frys_paa_midten(true)
+		aktuel_vare = area
+		
+		
 
 	if area.is_in_group("vare"):
 		if not area.has_meta("scannet"):
 			area.set_meta("scannet", true)
+			
+			if "skal_tastes" in area:
+				if area.skal_tastes == false:
+					$Scanner/BipLyd.play() 
+			else:
+				# Hvis varen ikke har fået variablen endnu, går vi ud fra det er en normal vare og bipper
+				$Scanner/BipLyd.play()
 
-			if is_instance_valid(aktiv_kunde):
-				aktiv_kunde.registrer_scannet_vare()
+			

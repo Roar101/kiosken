@@ -74,8 +74,8 @@ func _opdater_klik():
 func _on_pakke_zone_area_entered(area):
 	if area.is_in_group("vare"):
 
-		if not varer_klar_til_pakning.has(area):
-			varer_klar_til_pakning.append(area)
+		
+		varer_klar_til_pakning.append(area)
 
 		if pakke_timer.is_stopped():
 			pakke_en_vare()
@@ -90,33 +90,24 @@ func pakke_en_vare():
 
 
 func _on_pakke_timer_timeout():
-	if varer_klar_til_pakning.is_empty():
-		return
+	if not varer_klar_til_pakning.is_empty():
+		var aktuel_vare = varer_klar_til_pakning.pop_front()
 
-	var aktuel_vare = varer_klar_til_pakning.pop_front()
+		if is_instance_valid(aktuel_vare):
+			aktuel_vare.queue_free()
+			indsamlede_varer += 1
 
-	if is_instance_valid(aktuel_vare):
-		aktuel_vare.queue_free()
-		indsamlede_varer += 1
-
-		print(
+			print(
 			"Pakkede varer: ",
 			indsamlede_varer,
 			"/",
 			forventede_varer
 		)
 
-	if indsamlede_varer >= forventede_varer:
-		pakning_faerdig = true
-
-		if har_svaret:
+		if indsamlede_varer >= forventede_varer:
 			forlad_butikken()
-
-		return
-
-	if varer_klar_til_pakning.size() > 0:
-		pakke_en_vare()
-
+		elif varer_klar_til_pakning.size() > 0:
+			pakke_en_vare()
 
 func _input(event):
 	if not kan_klikkes:
