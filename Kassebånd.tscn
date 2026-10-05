@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cil8yjgfverlv" path="res://scanner.gd" id="2_grmvp"]
 [ext_resource type="AudioStream" uid="uid://8igursstgx5d" path="res://Sounds/475557__rannem__bip.wav" id="3_l67pu"]
 [ext_resource type="Script" uid="uid://cbxqloah3w8ig" path="res://numpad_knap.gd" id="4_l67pu"]
+[ext_resource type="Script" uid="uid://dp1nxlenh35we" path="res://bog_klik_zone.gd" id="7_vqufp"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x3t0m"]
 load_path = "res://.godot/imported/KioskKasseTest1920.png-102e84ed268427b022326054a60a8d3e.ctex"
@@ -30,9 +31,12 @@ b = Vector2(0, 241)
 b = Vector2(-1, 195)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bgmo"]
-size = Vector2(525, 238)
+size = Vector2(570, 238)
 
-[node name="Kassebånd" type="Area2D" unique_id=1732336203]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3uk5g"]
+size = Vector2(225, 136)
+
+[node name="Kassebånd" type="Area2D" unique_id=1732336203 groups=["kassebaand_system"]]
 script = ExtResource("1_7415g")
 
 [node name="MainBånd" type="Sprite2D" parent="." unique_id=591156797]
@@ -60,7 +64,7 @@ script = ExtResource("2_grmvp")
 position = Vector2(952.5, 952.5)
 shape = SubResource("RectangleShape2D_ox3iu")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Scanner" unique_id=1788078975]
+[node name="BipLyd" type="AudioStreamPlayer" parent="Scanner" unique_id=1788078975]
 stream = ExtResource("3_l67pu")
 
 [node name="NumpadKnap" type="Area2D" parent="." unique_id=677597772]
@@ -85,14 +89,21 @@ shape = SubResource("SegmentShape2D_fyjm8")
 [node name="StartGron" type="Area2D" parent="." unique_id=1354453726]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StartGron" unique_id=1073057805]
-position = Vector2(633, 857)
+position = Vector2(587, 854)
 shape = SubResource("SegmentShape2D_8bgmo")
 
 [node name="MidteZone" type="Area2D" parent="." unique_id=2142126772]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MidteZone" unique_id=1145990950]
-position = Vector2(897.5, 961)
+position = Vector2(875, 961)
 shape = SubResource("RectangleShape2D_8bgmo")
+
+[node name="BogKlikZone" type="Area2D" parent="." unique_id=648290678]
+script = ExtResource("7_vqufp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BogKlikZone" unique_id=1728476008]
+position = Vector2(997.5, 608)
+shape = SubResource("RectangleShape2D_3uk5g")
 
 [connection signal="area_entered" from="Scanner" to="Scanner" method="_on_area_entered"]
 [connection signal="area_exited" from="Scanner" to="Scanner" method="_on_area_exited"]
@@ -102,3 +113,4 @@ shape = SubResource("RectangleShape2D_8bgmo")
 [connection signal="area_entered" from="StopVenstre" to="." method="_on_stop_venstre_area_entered"]
 [connection signal="area_entered" from="StartGron" to="." method="_on_start_gron_area_entered"]
 [connection signal="area_entered" from="MidteZone" to="." method="_on_midte_zone_area_entered"]
+[connection signal="input_event" from="BogKlikZone" to="BogKlikZone" method="_on_input_event"]

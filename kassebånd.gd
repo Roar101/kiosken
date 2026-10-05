@@ -35,7 +35,6 @@ var aktiv_kunde = null
 
 const KUNDE_SCENE = preload("res://vare_scener/kunde_martin.tscn")
 
-
 func _ready():
 	GameState.start_vagt(120.0)
 	spawn_kunde_varer()

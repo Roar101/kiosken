@@ -222,6 +222,22 @@ offset_top = -735.0
 offset_right = 4009.9995
 offset_bottom = 2590.0
 
+[node name="LukKnap" type="Button" parent="TextureRect/ColorRect" unique_id=1670395459]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.203125
+anchor_top = -0.27314815
+anchor_right = 0.88532495
+anchor_bottom = 0.8479044
+offset_left = 1165.1952
+offset_top = 958.2176
+offset_right = 1165.1953
+offset_bottom = 958.2178
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+metadata/_edit_use_anchors_ = true
+
 [node name="DisplayContainer" type="HBoxContainer" parent="TextureRect" unique_id=889528546]
 layout_mode = 1
 anchors_preset = -1
@@ -344,6 +360,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_cl2ls")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_5gjm5")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_t1ntr")
 
+[connection signal="pressed" from="TextureRect/ColorRect/LukKnap" to="." method="_on_luk_knap_pressed"]
 [connection signal="pressed" from="TextureRect/Btn1" to="." method="_on_btn_1_pressed"]
 [connection signal="pressed" from="TextureRect/Btn2" to="." method="_on_btn_2_pressed"]
 [connection signal="pressed" from="TextureRect/Btn3" to="." method="_on_btn_3_pressed"]
